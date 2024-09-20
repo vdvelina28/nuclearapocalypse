@@ -1,0 +1,2 @@
+i am trying to make a nuclear apacolypse mod. first i want to add a countdown timer, this timer is 20 minutes and when its down to zero it will diseapear when it's down to zero it will go away. 
+the idea behind this is when the nuke ( will add that later) you have to be underground. if you are above ground you will get a radiation effect ( will also add this later) so you have to get seeds and stuff from above ground so you can live underground.
