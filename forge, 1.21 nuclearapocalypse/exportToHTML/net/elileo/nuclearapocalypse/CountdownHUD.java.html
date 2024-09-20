@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>CountdownHUD.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+CountdownHUD.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">net</span><span class="s2">.</span><span class="s1">elileo</span><span class="s2">.</span><span class="s1">nuclearapocalypse</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">mojang</span><span class="s2">.</span><span class="s1">blaze3d</span><span class="s2">.</span><span class="s1">systems</span><span class="s2">.</span><span class="s1">RenderSystem</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">mojang</span><span class="s2">.</span><span class="s1">blaze3d</span><span class="s2">.</span><span class="s1">vertex</span><span class="s2">.</span><span class="s1">PoseStack</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">net</span><span class="s2">.</span><span class="s1">minecraft</span><span class="s2">.</span><span class="s1">client</span><span class="s2">.</span><span class="s1">Minecraft</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">net</span><span class="s2">.</span><span class="s1">minecraft</span><span class="s2">.</span><span class="s1">client</span><span class="s2">.</span><span class="s1">gui</span><span class="s2">.</span><span class="s1">GuiGraphics</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">net</span><span class="s2">.</span><span class="s1">minecraft</span><span class="s2">.</span><span class="s1">network</span><span class="s2">.</span><span class="s1">chat</span><span class="s2">.</span><span class="s1">Component</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">net</span><span class="s2">.</span><span class="s1">minecraftforge</span><span class="s2">.</span><span class="s1">eventbus</span><span class="s2">.</span><span class="s1">api</span><span class="s2">.</span><span class="s1">SubscribeEvent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">net</span><span class="s2">.</span><span class="s1">minecraftforge</span><span class="s2">.</span><span class="s1">fml</span><span class="s2">.</span><span class="s1">common</span><span class="s2">.</span><span class="s1">Mod</span><span class="s2">;</span>
+
+
+<span class="s1">@Mod</span><span class="s2">.</span><span class="s1">EventBusSubscriber</span>
+<span class="s0">public class </span><span class="s1">CountdownHUD </span><span class="s2">{</span>
+
+    <span class="s0">private static final </span><span class="s1">CountdownTimer countdownTimer </span><span class="s2">= </span><span class="s0">new </span><span class="s1">CountdownTimer</span><span class="s2">();</span>
+
+    <span class="s1">@SubscribeEvent</span>
+    <span class="s0">public static void </span><span class="s1">onRenderGuiOverlay</span><span class="s2">(</span><span class="s1">RenderGameOverlayEvent</span><span class="s2">.</span><span class="s1">Pre event</span><span class="s2">) {</span>
+        <span class="s1">Minecraft minecraft </span><span class="s2">= </span><span class="s1">Minecraft</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">minecraft </span><span class="s2">!= </span><span class="s0">null </span><span class="s2">&amp;&amp; </span><span class="s1">minecraft</span><span class="s2">.</span><span class="s1">world </span><span class="s2">!= </span><span class="s0">null </span><span class="s2">&amp;&amp; </span><span class="s1">minecraft</span><span class="s2">.</span><span class="s1">screen </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">GuiGraphics gui </span><span class="s2">= </span><span class="s1">Minecraft</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">().</span><span class="s1">screen</span><span class="s2">.</span><span class="s1">getGuiGraphics</span><span class="s2">();</span>
+
+            <span class="s0">if </span><span class="s2">(!</span><span class="s1">countdownTimer</span><span class="s2">.</span><span class="s1">isFinished</span><span class="s2">()) {</span>
+                <span class="s1">String timeString </span><span class="s2">= </span><span class="s1">countdownTimer</span><span class="s2">.</span><span class="s1">getTimeString</span><span class="s2">();</span>
+                <span class="s0">int </span><span class="s1">screenWidth </span><span class="s2">= </span><span class="s1">minecraft</span><span class="s2">.</span><span class="s1">getWindow</span><span class="s2">().</span><span class="s1">getGuiScaledWidth</span><span class="s2">();</span>
+                <span class="s0">int </span><span class="s1">x </span><span class="s2">= (</span><span class="s1">screenWidth </span><span class="s2">/ </span><span class="s3">2</span><span class="s2">) - </span><span class="s1">minecraft</span><span class="s2">.</span><span class="s1">font</span><span class="s2">.</span><span class="s1">width</span><span class="s2">(</span><span class="s1">timeString</span><span class="s2">) / </span><span class="s3">2</span><span class="s2">;</span>
+                <span class="s0">int </span><span class="s1">y </span><span class="s2">= </span><span class="s3">10</span><span class="s2">;</span>
+
+                <span class="s1">RenderSystem</span><span class="s2">.</span><span class="s1">enableBlend</span><span class="s2">();</span>
+                <span class="s1">gui</span><span class="s2">.</span><span class="s1">drawString</span><span class="s2">(</span><span class="s1">minecraft</span><span class="s2">.</span><span class="s1">font</span><span class="s2">, </span><span class="s1">timeString</span><span class="s2">, </span><span class="s1">x</span><span class="s2">, </span><span class="s1">y</span><span class="s2">, </span><span class="s3">0xFFFFFF</span><span class="s2">);</span>
+                <span class="s1">RenderSystem</span><span class="s2">.</span><span class="s1">disableBlend</span><span class="s2">();</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span></pre>
+</body>
+</html>
